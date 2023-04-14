@@ -1,0 +1,87 @@
+/* Write your CSS here */
+.no_active_Container {
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: flex-start; */
+  /* padding-top: 40px; */
+  /* padding: 20px; */
+}
+
+.no_active_para {
+  color: black;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* ---------------------------------- */
+
+.yetToRegister_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.registerView_img {
+  width: 50%;
+}
+
+.registerView_para {
+  text-align: center;
+  font-size: 20px;
+}
+
+.registerView_button {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.registered_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.registered_image {
+  width: 30%;
+}
+
+.registered_msg {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.closedView_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.closed_image {
+  width: 50%;
+}
+
+.closed_heading {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.closed_para {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(56, 54, 54);
+}
