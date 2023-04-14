@@ -1,7 +1,9 @@
 import {Component} from 'react'
-import './index.css'
-import EventItem from '../EventItem'
+
 import ActiveEventRegistrationDetails from '../ActiveEventRegistrationDetails'
+import EventItem from '../EventItem'
+
+import './index.css'
 
 const eventsList = [
   {
@@ -52,52 +54,53 @@ const eventsList = [
     registrationStatus: 'REGISTRATIONS_CLOSED',
   },
 ]
-// ----------------------------------------------------
-
-const constStatusViews = {
-  initial: 'NO_ACTIVE',
-  yet_register: 'YET_TO_REGISTER',
-  registered: 'REGISTERED',
-  closed: 'REGISTRATIONS_CLOSED',
-}
 
 class Events extends Component {
   state = {
-    statusView: constStatusViews.initial,
     activeEventId: '',
   }
 
-  clickEventItem = (registrationStatus, id) =>
-    this.setState({statusView: registrationStatus, activeEventId: id})
+  getActiveEventRegistrationStatus = () => {
+    const {activeEventId} = this.state
+    const activeEventDetails = eventsList.find(
+      event => event.id === activeEventId,
+    )
+    if (activeEventDetails) {
+      return activeEventDetails.registrationStatus
+    }
+    return ''
+  }
 
-  renderEventsList = activeEventId => (
-    <>
-      <ul className="events_ul_container">
-        {eventsList.map(eachItem => (
+  setActiveEventId = id => {
+    this.setState({activeEventId: id})
+  }
+
+  renderEventsList = () => {
+    const {activeEventId} = this.state
+    return (
+      <ul className="events-list">
+        {eventsList.map(eachEvent => (
           <EventItem
-            eventItemDetails={eachItem}
-            key={eachItem.id}
-            clickEventItem={this.clickEventItem}
-            isActive={activeEventId === eachItem.id}
+            key={eachEvent.id}
+            eventDetails={eachEvent}
+            setActiveEventId={this.setActiveEventId}
+            isActive={eachEvent.id === activeEventId}
           />
         ))}
       </ul>
-    </>
-  )
+    )
+  }
 
   render() {
-    const {statusView, activeEventId} = this.state
     return (
-      <div className="page_container">
-        <div className="eventPage_container">
-          <div className="events_container">
-            <h1 className="heading">Events</h1>
-            {this.renderEventsList(activeEventId)}
-          </div>
-          <div className="activeEventRgstr_container">
-            <ActiveEventRegistrationDetails status={statusView} />
-          </div>
+      <div className="events-container">
+        <div className="events-content">
+          <h1 className="heading">Events</h1>
+          {this.renderEventsList()}
         </div>
+        <ActiveEventRegistrationDetails
+          activeEventRegistrationStatus={this.getActiveEventRegistrationStatus()}
+        />
       </div>
     )
   }
